@@ -90,8 +90,25 @@ def main():
                 matched = find_recipes_by_ingredients(cursor, ingredients)
 
                 print("\nMatching recipes:")
-                for recipe in matched:
-                    print("-", recipe[0])
+                for i, row in enumerate(matched, start=1):
+                    print(f"{i}: {row[0]}")
+
+                print("Would you like to see full pecipe of once? Print number of recipe or 'Q' for exit \n")
+                choice = input("Your choise: ").strip()
+                if choice.lower() == 'q':
+                    print("Bye!")
+                    
+                elif choice.isdigit():
+                    index = int(choice) - 1
+                    if 0 <= index < len(matched):
+                        selected_meal_name = matched[index][0]
+                        print(f"\n Full recipe for: {selected_meal_name}")
+
+                    else:
+                        print('Invalid number.')
+                else:
+                    print("Invalid input.")
+                    
 
     except psycopg2.Error as e:
         print(f"Database connection error: {e}")
