@@ -1,0 +1,5 @@
+DATABASE = 'Recipes'
+USER = 'postgres'
+PASSWORD = 'test'
+HOST = 'localhost'
+PORT = '5432'
