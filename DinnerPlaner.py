@@ -71,6 +71,16 @@ def find_recipes_by_ingredients(cursor, ingredients):
 
     return cursor.fetchall()
 
+def get_recipe_instructions(cursor, meal_name):
+    cursor.execute("""
+        SELECT instructions
+        FROM recipes
+        WHERE LOWER(name) = %s;
+    """, (meal_name.lower(),))
+    result = cursor.fetchone()
+    return result[0] if result else None
+
+
 # Main function
 def main():
     try:
@@ -103,9 +113,11 @@ def main():
                     if 0 <= index < len(matched):
                         selected_meal_name = matched[index][0]
                         print(f"\n Full recipe for: {selected_meal_name}")
-
-                    else:
-                        print('Invalid number.')
+                        instructions = get_recipe_instructions(cursor, selected_meal_name)
+                        if instructions:
+                            print(f"\n Instructions: \n {instructions}")
+                        else:
+                             print('Instructuons not found.')
                 else:
                     print("Invalid input.")
                     
