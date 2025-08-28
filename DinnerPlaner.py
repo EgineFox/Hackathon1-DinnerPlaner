@@ -219,12 +219,17 @@ def main():
                 create_tables(cursor)
                 preload_ingredient_cache(cursor)
                 load_recipes_by_category(cursor, connection)
-                
-
 
             while True:
-                user_input = input("Enter ingredients separated by commas: ")
+                user_input = input("Enter ingredients separated by commas: ").strip()
+                if not user_input:
+                    print("You must enter at least one ingredient.")
+                    continue
+
                 ingredients = [i.strip().lower() for i in user_input.split(",") if i.strip()]
+                if not ingredients:
+                    print("No valid ingredients detected. Please try again.")
+                    continue
 
                 with connection.cursor() as cursor:
                     matched = find_recipes_by_ingredients(cursor, ingredients)
@@ -235,19 +240,24 @@ def main():
                     if retry == 'q':
                         print("Bye!")
                         break
-                    else:
+                    elif retry == 'y':
                         continue
-                else:
-                    print("\nMatching recipes:")
-                    for i, row in enumerate(matched, start=1):
-                        name, category, area = row
-                        print(f"{i}: {name} | Category: {category} | Area: {area}")
+                    else:
+                        print("Invalid choice. Returning to input.")
+                        continue
 
+                print("\nMatching recipes:")
+                for i, row in enumerate(matched, start=1):
+                    name, category, area = row
+                    print(f"{i}: {name} | Category: {category} | Area: {area}")
+
+                while True:
                     print("\nWould you like to see full recipe? Enter number or 'Q' to quit")
-                    choice = input("Your choice: ").strip()
-                    if choice.lower() == 'q':
+                    choice = input("Your choice: ").strip().lower()
+
+                    if choice == 'q':
                         print("Bye!")
-                        break
+                        return
                     elif choice.isdigit():
                         index = int(choice) - 1
                         if 0 <= index < len(matched):
@@ -262,14 +272,16 @@ def main():
                                 print("\nInstructions:")
                                 print(recipe_data["instructions"])
                                 print("Bon appetit!")
-                                break
+                                return
                             else:
                                 print("Recipe not found in API.")
+                        else:
+                            print("Invalid number. Please choose from the list.")
                     else:
-                        print("Invalid input.")
+                        print("Invalid input. Please enter a number or 'Q'.")
     except psycopg2.Error as e:
         print(f"Database connection error: {e}")
 
 
 if __name__ == "__main__":
-    main()        
+     main()
