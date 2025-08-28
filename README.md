@@ -1,0 +1,57 @@
+# 📌 Project  "Dinner Planer" 
+Ingredient-based recipe search using TheMealDB API and Neon cloud database
+
+# 📍 Introduction
+
+What is this project?
+
+An interactive Python application that allows users to:
+
+•	Enter a list of ingredients
+•	Retrieve recipes that include all specified items
+•	View detailed instructions for the selected dish
+
+Data storage:
+
+All recipes and ingredients are stored in a PostgreSQL cloud database hosted on Neon, offering:
+
+•	High availability
+•	Strong security
+•	Easy scalability
+
+# 🧪 Technologies
+
+Project stack:
+•	Language: Python
+•	Database: PostgreSQL (Neon cloud)
+•	API: TheMealDB
+•	Libraries: psycopg2, requests
+•	DB Hosting: Neon.tech
+
+# 🧩 Architecture
+
+How it works:
+•	On launch, tables recipes and ingredients are created
+•	Data is fetched from the API and stored in Neon
+•	User inputs ingredients → SQL query finds matches
+•	Matching recipes are displayed → user can view full instructions
+
+# 🔍 Usage Example
+
+User scenario:
+1.	Input: chicken, garlic, onion
+2.	Output:
+o	Chicken Alfredo Category: Pasta Area: Italian
+o	Garlic Chicken Category: Main Area: American
+3.	Recipe selection → ingredients and step-by-step instructions are shown
+   
+# 💡 Improvement Idea
+
+Feature expansion: “Personal Culinary Assistant”
+
+•🔐 User authentication
+•📝 Save favorite recipes
+•⭐ Ratings and comments
+•📦 API response caching
+•📱 Web interface or Telegram bot
+•🌍 Multilingual support
