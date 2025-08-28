@@ -1,0 +1,8 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+.ttt_dpenv
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
