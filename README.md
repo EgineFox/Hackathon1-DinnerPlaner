@@ -59,9 +59,13 @@ How it works:
 User scenario:
 1.	Input: chicken stock, honey
 2.	Output:
+   
 o	Katsu Chicken curry | Category: Chicken | Area: Japanese
+
 o	General Tsos Chicken | Category: Chicken | Area: Chinese
+
 o	Honey Balsamic Chicken with Crispy Broccoli & Potatoes | Category: Chicken | Area: American
+
 4.	Recipe selection → ingredients and step-by-step instructions are shown
    
 # 💡 Improvement Idea
