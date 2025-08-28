@@ -126,7 +126,10 @@ def main():
             user=USER,
             password=PASSWORD,
             host=HOST,
-            port=PORT
+            port=PORT,
+            sslmode='require'
+           
+
         ) as connection:
             with connection.cursor() as cursor:
                 create_tables(cursor)
